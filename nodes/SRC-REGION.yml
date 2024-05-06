@@ -1,0 +1,63 @@
+steps:
+  REGION-c5bbf847-15f4-4145-a3e1-08fe1be2bf0f:
+    operation:
+      database: ""
+      dataset: ""
+      deployEnabled: true
+      description: Region data as defined by TPC-H
+      locationName: SRC
+      metadata:
+        columns:
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: 6930a7c0-f67a-4725-9b65-d5eb002f96a2
+              stepCounter: c5bbf847-15f4-4145-a3e1-08fe1be2bf0f
+            config: {}
+            dataType: NUMBER(38,0)
+            defaultValue: ""
+            description: ""
+            name: R_REGIONKEY
+            nullable: false
+            primaryKey: false
+            uniqueKey: false
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: 9c0a05aa-f998-49fd-a7d6-e3d86b45d3d9
+              stepCounter: c5bbf847-15f4-4145-a3e1-08fe1be2bf0f
+            config: {}
+            dataType: VARCHAR(25)
+            defaultValue: ""
+            description: ""
+            name: R_NAME
+            nullable: false
+            primaryKey: false
+            uniqueKey: false
+          - acceptedValues:
+              strictMatch: true
+              values: []
+            appliedColumnTests: {}
+            columnReference:
+              columnCounter: c11cf932-0cd4-4de8-a04e-7681abaf0747
+              stepCounter: c5bbf847-15f4-4145-a3e1-08fe1be2bf0f
+            config: {}
+            dataType: VARCHAR(152)
+            defaultValue: ""
+            description: ""
+            name: R_COMMENT
+            nullable: true
+            primaryKey: false
+            uniqueKey: false
+        join:
+          joinCondition: FROM {{ ref('SRC', 'REGION') }}
+      name: REGION
+      schema: ""
+      sqlType: Source
+      table: REGION
+      type: sourceInput
+    stepCounter: c5bbf847-15f4-4145-a3e1-08fe1be2bf0f
