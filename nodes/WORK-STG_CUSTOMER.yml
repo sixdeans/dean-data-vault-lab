@@ -1,0 +1,129 @@
+steps:
+  STG_CUSTOMER-eff9160a-bb40-4d10-bb1a-0fc474d7687f:
+    operation:
+      config:
+        insertStrategy: INSERT
+        postSQL: ""
+        preSQL: ""
+        testsEnabled: true
+        truncateBefore: true
+      database: ""
+      deployEnabled: true
+      description: ""
+      isMultisource: false
+      locationName: WORK
+      materializationType: table
+      metadata:
+        appliedNodeTests: []
+        columns:
+          - columnReference:
+              columnCounter: b1d1bcf8-ea29-4c04-950c-34c2b82e1cbd
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: NUMBER(12,2)
+            description: ""
+            name: ACCTBAL
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: a9d7c6df-c2be-4bfc-b804-9beaf3ec9d4a
+                    stepCounter: 7f5b5d47-de6f-4ded-b4d7-140085528925
+                transform: ""
+          - columnReference:
+              columnCounter: 42ad8d78-e685-4748-9c63-a738904360cd
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: VARCHAR(40)
+            description: ""
+            name: ADDRESS
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: ff002680-2f52-448d-91b9-86c709cc5f55
+                    stepCounter: 7f5b5d47-de6f-4ded-b4d7-140085528925
+                transform: ""
+          - columnReference:
+              columnCounter: 7d5fc80c-5e9d-44fb-b80f-984360b8dc9e
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: NUMBER(38,0)
+            description: ""
+            name: CUSTKEY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 8a318a7b-d14d-4f3e-8655-9959818919b5
+                    stepCounter: 055012e6-a280-4482-9805-1e6f338b1391
+                transform: ""
+          - columnReference:
+              columnCounter: 59eabeda-aea0-4797-ac4d-f73862a86e37
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: VARCHAR(10)
+            description: ""
+            name: MKTSEGMENT
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 3cb91ad4-3ef5-4501-8991-5c22c5b685f1
+                    stepCounter: 7f5b5d47-de6f-4ded-b4d7-140085528925
+                transform: ""
+          - columnReference:
+              columnCounter: ec602afe-8aa3-4b26-81ba-09d586798561
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: VARCHAR(10)
+            description: ""
+            name: CREDIT_STATUS
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 3cb91ad4-3ef5-4501-8991-5c22c5b685f1
+                    stepCounter: 7f5b5d47-de6f-4ded-b4d7-140085528925
+                transform: CASE WHEN "SATV1_CUSTOMER"."C_ACCTBAL" > 5000 AND "SATV1_CUSTOMER"."C_MKTSEGMENT" IN ('FURNITURE','AUTOMOBILE') THEN 'HIGH' ELSE 'LOW' END
+          - columnReference:
+              columnCounter: 6a8aade2-790f-4597-b4fe-43dc511fe6af
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: VARCHAR(25)
+            description: ""
+            name: NAME
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: bfccb146-018e-43bd-874e-00704b8bd3dc
+                    stepCounter: 7f5b5d47-de6f-4ded-b4d7-140085528925
+                transform: ""
+          - columnReference:
+              columnCounter: a3325d16-ca0e-4a43-97dc-6e053add39eb
+              stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
+            dataType: VARCHAR(15)
+            description: ""
+            name: PHONE
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 1b3ddc38-a5ab-4bfd-a1d8-c30e3c1a3351
+                    stepCounter: 7f5b5d47-de6f-4ded-b4d7-140085528925
+                transform: ""
+        cteString: ""
+        enabledColumnTestIDs: []
+        sourceMapping:
+          - aliases:
+              HUB_CUSTOMER: 055012e6-a280-4482-9805-1e6f338b1391
+              SATV1_CUSTOMER: 7f5b5d47-de6f-4ded-b4d7-140085528925
+            customSQL:
+              customSQL: ""
+            dependencies:
+              - locationName: WORK
+                nodeName: HUB_CUSTOMER
+              - locationName: WORK
+                nodeName: SATV1_CUSTOMER
+            join:
+              joinCondition: |-
+                FROM {{ ref('WORK', 'SATV1_CUSTOMER') }} "SATV1_CUSTOMER"
+                INNER JOIN {{ ref('WORK', 'HUB_CUSTOMER') }} "HUB_CUSTOMER"
+                ON "SATV1_CUSTOMER"."HK_CUSTOMER_H" = "HUB_CUSTOMER"."HK_CUSTOMER_H"
+                WHERE "SATV1_CUSTOMER"."IS_CURRENT" = true
+            name: STG_CUSTOMER
+            noLinkRefs: []
+      name: STG_CUSTOMER
+      overrideSQL: false
+      schema: ""
+      sqlType: Stage
+      type: sql
+    stepCounter: eff9160a-bb40-4d10-bb1a-0fc474d7687f
